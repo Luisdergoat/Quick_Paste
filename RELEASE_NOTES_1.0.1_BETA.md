@@ -1,6 +1,6 @@
-# Cliply v1.0.1 Beta - Release Notes
+# Cliply v1.0.2 Beta - Release Notes
 
-**Release Datum:** 10. März 2026  
+**Release Datum:** 11. März 2026  
 **Status:** Beta (Early Access)
 
 ## 🎉 Was ist neu?
@@ -49,7 +49,7 @@ open cliply.xcodeproj
 | ⌘⇧C | Kopiert die Auswahl und speichert sie in der History |
 | ⌘⇧V | Zeigt die Clipboard-History an |
 
-## 🔄 Von v1.0.0 upgraden
+## 🔄 Von v1.0.1 upgraden
 
 Einfach die alte Version beenden und die neue installieren. Ihre Einstellungen bleiben erhalten.
 
@@ -65,4 +65,4 @@ Siehe [CHANGELOG.md](CHANGELOG.md) für alle Details.
 
 ---
 
-**Danke, dass Sie Cliply testen!** 🙏
+**Danke, dass Sie Cliply 1.0.2 Beta testen!** 🙏

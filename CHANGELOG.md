@@ -2,50 +2,6 @@
 
 All notable changes to Cliply will be documented in this file.
 
-## [1.0.1 Beta] - 2026-03-10
-
-### ✨ Added
-- **Auto-Update Feature**: Check for updates directly from GitHub releases
-  - Visual update indicator in Settings
-  - Automatic DMG download
-  - Installation instructions after download
-- **Individual Item Deletion**: Press `R` to delete selected item in history popup
-- **Most Recently Used (MRU)**: Items automatically move to top when pasted
-- **Settings Access Improvements**:
-  - Settings now open via menu bar click
-  - Settings shortcut `⌘,` added
-  - Direct access via left-click on menu bar icon
-  - Settings automatically open on first launch
-- **Better keyboard shortcuts documentation** in popup footer
-
-### 🔧 Fixed
-- **Settings Window not opening**: Complete rewrite of window management
-  - Fixed transparent window issue
-  - Proper window lifecycle management
-  - Window now stays open when clicked
-- **CGEvent Tap Implementation**: No more system beep on shortcuts
-  - `⌘⇧C` and `⌘⇧V` now recognized as valid system shortcuts
-  - Requires Accessibility permission
-- **FIFO Queue**: Oldest item automatically removed when reaching 10 items
-- **Selection Index**: Fixed index adjustment after item deletion
-
-### 🎨 Changed
-- Footer hints updated: "Delete" → "Clear All", added "Remove" for `R` key
-- Window Manager: Improved debugging output
-- ClipboardManager: Added `removeItem(at:)` and `moveToFront(at:)` methods
-- Settings Window: Better styling with visible titlebar
-
-### 🏗️ Technical
-- Added `UpdateManager.swift`: GitHub API integration for updates
-- Version comparison logic for semantic versioning
-- URLSession-based async update checks
-- Improved error handling in all managers
-
----
-
-## [1.0.0] - 2024-12-28
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
-
 ## [Unreleased]
 
 ### Planned
@@ -55,6 +11,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Custom themes and colors
 - Export/import clipboard history
 
+## [1.0.2 Beta] - 2026-03-11
+
+### Added
+- Auto-update checks from GitHub releases, including release-note display, DMG detection, download flow, and install instructions.
+- Single-item removal in the popup with `R` for granular history cleanup.
+- Dedicated auto-update section in Settings with progress feedback and latest-version status.
+- Expanded popup footer guidance for `R` remove and `D` clear-all actions.
+
+### Changed
+- Recently pasted items now move to the top of the history using MRU ordering.
+- Settings window layout was expanded and polished for the new update controls.
+- Popup width increased to better fit history content and keyboard hints.
+- History handling is now explicitly capped at 10 items with clearer FIFO behavior.
+
+### Fixed
+- Settings window creation and lifecycle handling so the window reliably opens and remains visible.
+- Transparent or invalid settings-window rendering by using a standard titled window configuration.
+- Selection index handling after item deletion in compact and expanded popup modes.
+- Update-check UX with clearer no-update, download-failure, and install-follow-up messaging.
+
+### Technical
+- Added `UpdateManager.swift` for GitHub API integration and semantic version comparison.
+- Added `removeItem(at:)` and `moveToFront(at:)` to `ClipboardManager`.
+- Extended `ClipboardPopup` keyboard event handling with a dedicated delete-selected callback.
+- Improved `WindowManager` ownership of settings and popup windows.
+
 ## [1.0.1 Beta] - 2026-03-10
 
 ### Changed
@@ -62,30 +44,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Settings window opens automatically on first launch
 - Clicking the menu bar icon now opens Settings (right-click for menu)
 - Removed ⌘⇧S keyboard shortcut for Settings
-- **Complete rewrite of HotkeyManager using CGEvent Tap** (prevents system beep!)
+- Complete rewrite of `HotkeyManager` using CGEvent Tap to prevent the system beep
 
 ### Fixed
-- **System beep sound eliminated!** Shortcuts now use CGEvent Tap to intercept events before the system
-- Keyboard shortcuts (⌘⇧C and ⌘⇧V) properly consume events
-- Events are now marked as "handled" by the system
+- System beep sound eliminated for `⌘⇧C` and `⌘⇧V`
+- Keyboard shortcuts now consume events before the system handles them
+- Accessibility permission flow is clearer during first launch
 
 ### Technical
 - Replaced NSEvent monitors with CGEvent Tap
-- Events intercepted at `.headInsertEventTap` level
-- `return nil` in callback consumes events completely
-- Auto-reactivation of tap if disabled by system
-- Improved Accessibility permission description
-
-### Improved
-- Better first-time user experience with guided setup
-- Clear feedback when Accessibility permission is missing
+- Intercepted events at `.headInsertEventTap`
+- Added tap auto-reactivation when disabled by macOS
 
 ## [1.0.0] - 2026-03-10
 
 ### Added
 - Initial release of Cliply
-- Curated clipboard history (⌘⇧C to save)
-- Quick access popup (⌘⇧V to view)
+- Curated clipboard history (`⌘⇧C` to save)
+- Quick access popup (`⌘⇧V` to view)
 - Keyboard navigation (Tab, Arrow keys, Return)
 - Expandable history (up to 10 items)
 - Native macOS design with frosted glass
@@ -103,6 +79,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Spring animations
 - Auto-paste selected items
 
-[Unreleased]: https://github.com/luisdergoat/cliply/compare/v1.0.1-beta...HEAD
+[Unreleased]: https://github.com/luisdergoat/cliply/compare/v1.0.2-beta...HEAD
+[1.0.2 Beta]: https://github.com/luisdergoat/cliply/releases/tag/v1.0.2-beta
 [1.0.1 Beta]: https://github.com/luisdergoat/cliply/releases/tag/v1.0.1-beta
 [1.0.0]: https://github.com/luisdergoat/cliply/releases/tag/v1.0.0

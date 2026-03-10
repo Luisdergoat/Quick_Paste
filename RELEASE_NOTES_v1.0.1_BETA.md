@@ -1,9 +1,9 @@
-# Cliply v1.0.1 Beta - Release Notes
+# Cliply v1.0.2 Beta - Release Notes
 
 ## 🎉 Major Release - Alle Features Implementiert!
 
-**Release Date:** März 2026  
-**Build:** 2  
+**Release Date:** 11. März 2026  
+**Build:** 3  
 **Status:** Beta
 
 ---
@@ -124,7 +124,7 @@ brew install --cask cliply
 
 ---
 
-## 🔄 Update von v1.0.0
+## 🔄 Update von v1.0.1
 
 ### Automatisch (NEU!)
 1. Cliply öffnen → Settings
@@ -203,9 +203,9 @@ brew install --cask cliply
 
 ---
 
-## 🔮 Roadmap (Zukünftig)
+## 🔮 Roadmap (Nach v1.0.2 Beta)
 
-### v1.0.2
+### v1.0.3
 - [ ] Vollautomatische Installation bei Updates
 - [ ] Settings Window Position speichern
 - [ ] Mehr Themes / Dark Mode Toggle
@@ -247,4 +247,4 @@ MIT License - © 2024-2026 Cliply
 ✅ **Granulare Kontrolle** - Einzelne Items löschen  
 ✅ **Performance** - 10 Items Maximum  
 
-**Status: Beta → Bereit für Release Candidate!** 🚀
+**Status: 1.0.2 Beta ist dokumentiert und bereit für den nächsten Beta-Zyklus.** 🚀

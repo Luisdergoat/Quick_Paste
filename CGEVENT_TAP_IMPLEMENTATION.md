@@ -1,4 +1,4 @@
-# Cliply v1.0.1 Beta - CGEvent Tap Implementation
+# Cliply v1.0.2 Beta - CGEvent Tap Implementation
 
 ## ✅ Implementierung abgeschlossen!
 
@@ -130,7 +130,7 @@ return Unmanaged.passRetained(event)  // Andere Events durchlassen
 1. **Teste in Xcode** → Keine Beeps mehr! ✓
 2. **Erstelle DMG** → `bash scripts/build_dmg.sh`
 3. **Teste DMG-Installation** → Installiere und teste
-4. **Release erstellen** → GitHub Release v1.0.1-beta
+4. **Release erstellen** → GitHub Release v1.0.2-beta
 
 ## 💡 Hinweise
 

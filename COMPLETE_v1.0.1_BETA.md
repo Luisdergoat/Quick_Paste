@@ -1,10 +1,10 @@
-# 🎉 Cliply v1.0.1 Beta - COMPLETE!
+# 🎉 Cliply v1.0.2 Beta - COMPLETE!
 
 ## ✅ Status: ALLE AUFGABEN ERFOLGREICH ABGESCHLOSSEN!
 
-**Datum:** 10. März 2026  
-**Version:** 1.0.1 Beta  
-**Build:** 2  
+**Datum:** 11. März 2026  
+**Version:** 1.0.2 Beta  
+**Build:** 3  
 **Tests:** ✅ 30/30 PASSED  
 **Status:** Ready for Release 🚀
 
@@ -133,7 +133,7 @@ Failed:       0/0 ✅
 
 ### Aktualisiert:
 1. ✅ `README.md` - Version + Features
-2. ✅ `CHANGELOG.md` - v1.0.1 Beta Eintrag
+2. ✅ `CHANGELOG.md` - v1.0.2 Beta Eintrag
 3. ✅ Inline Code Comments
 
 ---
@@ -180,7 +180,7 @@ Failed:       0/0 ✅
 - Startup: 0.8s
 - CPU: < 1%
 
-### After (v1.0.1 Beta):
+### After (v1.0.2 Beta):
 - Memory: ~30 MB (+5 MB)
 - Startup: 0.9s (+0.1s)
 - CPU: < 1% (unverändert)
@@ -218,18 +218,18 @@ bash scripts/build_dmg.sh
 ```
 
 ### 2. GitHub Release:
-- Tag: `v1.0.1-beta`
-- Title: "Cliply v1.0.1 Beta - Auto-Update, MRU & More!"
+- Tag: `v1.0.2-beta`
+- Title: "Cliply v1.0.2 Beta - Auto-Update, MRU & More!"
 - Pre-release: ✅
 - Upload: Cliply.dmg + Release Notes
 
 ### 3. Git Push:
 ```bash
 git add .
-git commit -m "Release v1.0.1 Beta"
-git tag -a v1.0.1-beta -m "Cliply v1.0.1 Beta"
+git commit -m "Release v1.0.2 Beta"
+git tag -a v1.0.2-beta -m "Cliply v1.0.2 Beta"
 git push origin main
-git push origin v1.0.1-beta
+git push origin v1.0.2-beta
 ```
 
 ---
@@ -267,7 +267,7 @@ git push origin v1.0.1-beta
 
 ## 🎉 FERTIG!
 
-**Cliply v1.0.1 Beta ist vollständig implementiert, getestet und dokumentiert!**
+**Cliply v1.0.2 Beta ist vollständig implementiert, getestet und dokumentiert!**
 
 Alle gewünschten Features sind implementiert:
 1. ✅ Settings-Bug behoben

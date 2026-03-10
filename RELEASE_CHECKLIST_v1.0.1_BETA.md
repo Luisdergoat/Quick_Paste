@@ -1,8 +1,8 @@
-# Cliply v1.0.1 Beta - Release Checklist
+# Cliply v1.0.2 Beta - Release Checklist
 
 **Status:** ✅ READY FOR RELEASE  
-**Date:** March 10, 2026  
-**Build:** 2  
+**Date:** March 11, 2026  
+**Build:** 3  
 **All Tests:** ✅ 30/30 PASSED
 
 ---
@@ -22,10 +22,10 @@
 - [x] App signed with Apple Developer certificate
 
 ### Documentation
-- [x] README.md updated with v1.0.1 Beta
+- [x] README.md updated with v1.0.2 Beta
 - [x] CHANGELOG.md updated
-- [x] RELEASE_NOTES_v1.0.1_BETA.md created
-- [x] IMPLEMENTATION_SUMMARY_v1.0.1.md created
+- [x] RELEASE_NOTES_v1.0.1_BETA.md updated for v1.0.2 Beta
+- [x] IMPLEMENTATION_SUMMARY_v1.0.1.md updated for v1.0.2 Beta
 - [x] Keyboard shortcuts documented
 - [x] Installation instructions updated
 - [x] New features highlighted
@@ -64,8 +64,8 @@ bash scripts/build_dmg.sh
 ### 2. Create GitHub Release
 
 #### Release Details:
-- **Tag:** `v1.0.1-beta`
-- **Title:** `Cliply v1.0.1 Beta - Auto-Update, MRU & More!`
+- **Tag:** `v1.0.2-beta`
+- **Title:** `Cliply v1.0.2 Beta - Auto-Update, MRU & More!`
 - **Pre-release:** ✅ (mark as beta)
 
 #### Upload Assets:
@@ -74,7 +74,7 @@ bash scripts/build_dmg.sh
 
 #### Release Description:
 ```markdown
-# 🎉 Cliply v1.0.1 Beta
+# 🎉 Cliply v1.0.2 Beta
 
 Major update with highly requested features!
 
@@ -126,7 +126,7 @@ cd /Users/lunsold/42/Quick_Paste
 git add .
 
 # Commit
-git commit -m "Release v1.0.1 Beta - Auto-Update, MRU, Settings Fixes
+git commit -m "Release v1.0.2 Beta - Auto-Update, MRU, Settings Fixes
 
 Features:
 - Auto-Update from GitHub releases
@@ -147,9 +147,9 @@ Documentation:
 - Test suite"
 
 # Create and push tag
-git tag -a v1.0.1-beta -m "Cliply v1.0.1 Beta - Auto-Update & MRU"
+git tag -a v1.0.2-beta -m "Cliply v1.0.2 Beta - Auto-Update & MRU"
 git push origin main
-git push origin v1.0.1-beta
+git push origin v1.0.2-beta
 ```
 
 ---
@@ -204,12 +204,12 @@ git push origin v1.0.1-beta
 1. **Auto-Update requires manual DMG installation**
    - DMG downloads to ~/Downloads
    - User must drag to Applications manually
-   - Fix planned for v1.0.2 (Sparkle framework)
+   - Fix planned for v1.0.3 (Sparkle framework)
 
 2. **Settings window position not saved**
    - Window always opens centered
    - Position is not remembered
-   - Fix planned for v1.0.2
+   - Fix planned for v1.0.3
 
 3. **Accessibility permission required**
    - Required for CGEvent Tap
@@ -223,7 +223,7 @@ git push origin v1.0.1-beta
 
 ---
 
-## 🔮 Next Steps (v1.0.2 Roadmap)
+## 🔮 Next Steps (Post-v1.0.2 Roadmap)
 
 ### High Priority
 - [ ] Sparkle framework integration (fully automatic updates)
@@ -303,7 +303,7 @@ git push origin v1.0.1-beta
 
 ## 🚀 Ready for Release!
 
-**Cliply v1.0.1 Beta is production-ready and awaiting DMG creation + GitHub release!**
+**Cliply v1.0.2 Beta is production-ready and awaiting DMG creation + GitHub release!**
 
 All code is complete, tested, and documented. The app is stable, performant, and feature-complete for this beta release.
 
@@ -311,8 +311,8 @@ All code is complete, tested, and documented. The app is stable, performant, and
 
 ---
 
-**Date:** March 10, 2026  
-**Version:** 1.0.1 Beta  
-**Build:** 2  
+**Date:** March 11, 2026  
+**Version:** 1.0.2 Beta  
+**Build:** 3  
 **Status:** ✅ READY FOR RELEASE  
 **Quality:** Production-Grade Beta

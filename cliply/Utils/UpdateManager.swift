@@ -21,7 +21,7 @@ final class UpdateManager: ObservableObject {
         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
             self.currentVersion = version
         } else {
-            self.currentVersion = "1.0.1 Beta"
+            self.currentVersion = "1.0.2 Beta"
         }
     }
     

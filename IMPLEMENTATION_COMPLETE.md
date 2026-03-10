@@ -1,4 +1,4 @@
-# ✅ Cliply v1.0.1 Beta - CGEvent Tap Implementation ABGESCHLOSSEN
+# ✅ Cliply v1.0.2 Beta - CGEvent Tap Implementation ABGESCHLOSSEN
 
 ## 🎉 Was wurde implementiert?
 
@@ -44,7 +44,7 @@ bash scripts/test_cgevent_tap.sh
 
 Ergebnisse:
 - ✅ App vorhanden und lauffähig
-- ✅ Version 1.0.1 Beta (Build 2)
+- ✅ Version 1.0.2 Beta (Build 3)
 - ✅ CGEvent Tap in HotkeyManager.swift
 - ✅ Accessibility Description in Info.plist
 - ✅ App läuft erfolgreich
@@ -112,7 +112,7 @@ log stream --predicate 'process == "Cliply"' --level debug
    
 2. **cliply/Resources/Info.plist**
    - Accessibility-Beschreibung aktualisiert
-   - Version auf 1.0.1 Beta, Build 2
+   - Version auf 1.0.2 Beta, Build 3
 
 3. **CHANGELOG.md**
    - Details zur CGEvent Tap Implementation

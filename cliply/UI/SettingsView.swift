@@ -257,7 +257,7 @@ struct SettingsView: View {
     private var footerView: some View {
         VStack(spacing: 12) {
             // Version
-            Text("Version 1.0.1 Beta")
+            Text("Version 1.0.2 Beta")
                 .font(.system(size: 11, weight: .medium))
                 .foregroundColor(.scSecondary)
             

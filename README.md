@@ -4,9 +4,9 @@
 
 # Cliply
 
-[![Download DMG](https://img.shields.io/badge/Download-DMG-blue?style=for-the-badge&logo=apple)](https://github.com/Luisdergoat/Quick_Paste/releases/tag/Clipy)
+[![Download DMG](https://img.shields.io/badge/Download-DMG-blue?style=for-the-badge&logo=apple)](https://github.com/Luisdergoat/Quick_Paste/releases/latest)
 [![Latest Release](https://img.shields.io/github/v/release/luisdergoat/cliply?style=for-the-badge)](https://github.com/Luisdergoat/Quick_Paste)
-[![Version](https://img.shields.io/badge/Version-1.0.1%20Beta-orange?style=for-the-badge)](https://github.com/Luisdergoat/Quick_Paste/releases)
+[![Version](https://img.shields.io/badge/Version-1.0.2%20Beta-orange?style=for-the-badge)](https://github.com/Luisdergoat/Quick_Paste/releases)
 [![Swift](https://img.shields.io/badge/Swift-FA7343?style=for-the-badge&logo=swift&logoColor=white)](https://swift.org)
 [![Xcode](https://img.shields.io/badge/Xcode-007ACC?style=for-the-badge&logo=Xcode&logoColor=white)](https://developer.apple.com/xcode/)
 [![macOS](https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=apple&logoColor=white)](https://www.apple.com/macos/)
@@ -59,23 +59,23 @@ Press **⌘⇧V** to instantly view your last 3 clipboard items in a beautiful p
 ### 📚 Expandable History
 Press **H** to reveal your full clipboard history (up to 10 items).
 
-### 🗑️ Granular Control (NEW in v1.0.1 Beta)
+### 🗑️ Granular Control (NEW in v1.0.2 Beta)
 - Press **R** to delete selected item
 - Press **D** to clear entire history
 - Individual item management
 
-### 🧠 Smart History (NEW in v1.0.1 Beta)
+### 🧠 Smart History (NEW in v1.0.2 Beta)
 - **Most Recently Used (MRU)**: Frequently pasted items stay at the top
 - **FIFO Queue**: Oldest items automatically removed when reaching 10 items
 - Intelligent sorting keeps your workflow efficient
 
-### 🔄 Auto-Update (NEW in v1.0.1 Beta)
+### 🔄 Auto-Update (NEW in v1.0.2 Beta)
 - Check for updates directly from Settings
 - Automatic download from GitHub releases
 - One-click installation
 - Never manually update again!
 
-### ⚙️ Enhanced Settings (NEW in v1.0.1 Beta)
+### ⚙️ Enhanced Settings (NEW in v1.0.2 Beta)
 - Access via menu bar or **⌘,** shortcut
 - Opens automatically on first launch
 - Clean, intuitive interface
@@ -133,7 +133,7 @@ brew install --cask cliply
 | **⌘⇧C** | History copy — copies selection **and** saves to history |
 | ⌘V | Normal paste the last thing copied |
 | **⌘⇧V** | Show clipboard history popup |
-| **⌘,** | Open Settings (NEW in v1.0.1 Beta) |
+| **⌘,** | Open Settings (NEW in v1.0.2 Beta) |
 
 ### In History Popup
 | Key | Action |
@@ -141,8 +141,8 @@ brew install --cask cliply
 | Tab / ⇥ | Move selection down |
 | Return / ↩ | Paste selected item |
 | H | Toggle expanded view (3 ↔ 10 items) |
-| **R** | Remove selected item (NEW in v1.0.1 Beta) |
-| **D** | Clear entire history (NEW in v1.0.1 Beta) |
+| **R** | Remove selected item (NEW in v1.0.2 Beta) |
+| **D** | Clear entire history (NEW in v1.0.2 Beta) |
 | Escape / ⎋ | Dismiss popup |
 
 
