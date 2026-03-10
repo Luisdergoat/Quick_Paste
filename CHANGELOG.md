@@ -14,6 +14,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Custom themes and colors
 - Export/import clipboard history
 
+## [1.0.1 Beta] - 2026-03-10
+
+### Changed
+- App is now disabled by default on first launch
+- Settings window opens automatically on first launch
+- Clicking the menu bar icon now opens Settings (right-click for menu)
+- Removed ⌘⇧S keyboard shortcut for Settings
+- **Complete rewrite of HotkeyManager using CGEvent Tap** (prevents system beep!)
+
+### Fixed
+- **System beep sound eliminated!** Shortcuts now use CGEvent Tap to intercept events before the system
+- Keyboard shortcuts (⌘⇧C and ⌘⇧V) properly consume events
+- Events are now marked as "handled" by the system
+
+### Technical
+- Replaced NSEvent monitors with CGEvent Tap
+- Events intercepted at `.headInsertEventTap` level
+- `return nil` in callback consumes events completely
+- Auto-reactivation of tap if disabled by system
+- Improved Accessibility permission description
+
+### Improved
+- Better first-time user experience with guided setup
+- Clear feedback when Accessibility permission is missing
+
 ## [1.0.0] - 2026-03-10
 
 ### Added
@@ -37,5 +62,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Spring animations
 - Auto-paste selected items
 
-[Unreleased]: https://github.com/luisdergoat/cliply/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/luisdergoat/cliply/compare/v1.0.1-beta...HEAD
+[1.0.1 Beta]: https://github.com/luisdergoat/cliply/releases/tag/v1.0.1-beta
 [1.0.0]: https://github.com/luisdergoat/cliply/releases/tag/v1.0.0

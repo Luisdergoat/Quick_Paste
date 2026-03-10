@@ -1,7 +1,7 @@
 import AppKit
 import Carbon
 
-/// Registers and handles global keyboard shortcuts.
+/// Registers and handles global keyboard shortcuts using CGEvent Tap.
 ///
 /// Cliply intercepts two shortcuts:
 ///
@@ -12,8 +12,9 @@ import Carbon
 /// - **⌘⇧V** — "history paste": shows the ``ClipboardPopup`` floating
 ///   panel.
 ///
-/// Global event monitoring requires the Accessibility permission granted
-/// in System Settings → Privacy & Security → Accessibility.
+/// Uses CGEvent Tap to intercept events BEFORE the system processes them,
+/// preventing the system beep sound when no default handler exists.
+/// Requires Accessibility permission in System Settings → Privacy & Security → Accessibility.
 final class HotkeyManager {
 
     // MARK: - Singleton
@@ -22,8 +23,8 @@ final class HotkeyManager {
 
     // MARK: - Private State
 
-    private var globalMonitor: Any?
-    private var localMonitor: Any?
+    private var eventTap: CFMachPort?
+    private var runLoopSource: CFRunLoopSource?
 
     // MARK: - Init / Deinit
 
@@ -35,28 +36,40 @@ final class HotkeyManager {
 
     // MARK: - Lifecycle
 
-    /// Starts listening for global keyboard events. Call once on app launch.
+    /// Starts listening for global keyboard events using CGEvent Tap.
     func start() {
-        print("🎹 HotkeyManager: Starting global keyboard monitoring...")
+        print("🎹 HotkeyManager: Starting CGEvent Tap monitoring...")
         
-        // Monitor events from other applications.
-        globalMonitor = NSEvent.addGlobalMonitorForEvents(
-            matching: .keyDown
-        ) { [weak self] event in
-            self?.handle(event: event)
-        }
-
-        // Also monitor events from within ShiftClip itself (e.g. when the
-        // popup window is key).
-        localMonitor = NSEvent.addLocalMonitorForEvents(
-            matching: .keyDown
-        ) { [weak self] event in
-            self?.handle(event: event)
-            // Return the event so SwiftUI can also process it (keyboard nav).
-            return event
+        // Stop any existing tap first
+        stop()
+        
+        // Create event tap to intercept keyboard events
+        let eventMask = (1 << CGEventType.keyDown.rawValue) | (1 << CGEventType.flagsChanged.rawValue)
+        
+        guard let eventTap = CGEvent.tapCreate(
+            tap: .cgSessionEventTap,
+            place: .headInsertEventTap,
+            options: .defaultTap,
+            eventsOfInterest: CGEventMask(eventMask),
+            callback: { (proxy, type, event, refcon) -> Unmanaged<CGEvent>? in
+                return HotkeyManager.eventTapCallback(proxy: proxy, type: type, event: event, refcon: refcon)
+            },
+            userInfo: nil
+        ) else {
+            print("❌ HotkeyManager: Failed to create event tap - Accessibility permission required!")
+            print("   Please grant Accessibility access in System Settings → Privacy & Security → Accessibility")
+            return
         }
         
-        print("✅ HotkeyManager: Monitoring active")
+        // Create run loop source and add to current run loop
+        let runLoopSource = CFMachPortCreateRunLoopSource(kCFAllocatorDefault, eventTap, 0)
+        CFRunLoopAddSource(CFRunLoopGetCurrent(), runLoopSource, .commonModes)
+        CGEvent.tapEnable(tap: eventTap, enable: true)
+        
+        self.eventTap = eventTap
+        self.runLoopSource = runLoopSource
+        
+        print("✅ HotkeyManager: CGEvent Tap active - no more beep!")
     }
 
     /// Starts listening for global keyboard events.
@@ -71,39 +84,78 @@ final class HotkeyManager {
     
     /// Stops listening for global keyboard events.
     func stop() {
-        if let monitor = globalMonitor {
-            NSEvent.removeMonitor(monitor)
-            globalMonitor = nil
+        if let eventTap = eventTap {
+            CGEvent.tapEnable(tap: eventTap, enable: false)
+            CFMachPortInvalidate(eventTap)
+            self.eventTap = nil
         }
-        if let monitor = localMonitor {
-            NSEvent.removeMonitor(monitor)
-            localMonitor = nil
+        
+        if let runLoopSource = runLoopSource {
+            CFRunLoopRemoveSource(CFRunLoopGetCurrent(), runLoopSource, .commonModes)
+            self.runLoopSource = nil
         }
-        print("🛑 HotkeyManager: Monitoring stopped")
+        
+        print("🛑 HotkeyManager: CGEvent Tap stopped")
     }
 
-    // MARK: - Event Handling
+    // MARK: - Event Tap Callback
 
-    private func handle(event: NSEvent) {
-        let mods = event.modifierFlags.intersection(.deviceIndependentFlagsMask)
-        let shiftCmd: NSEvent.ModifierFlags = [.command, .shift]
-
-        guard mods == shiftCmd else { return }
-
-        // Use Int(event.keyCode) so the Carbon kVK_* (Int) constants match
-        switch Int(event.keyCode) {
-        case kVK_ANSI_C:  // ⌘⇧C
-            print("⌨️ HotkeyManager: ⌘⇧C detected")
-            performHistoryCopy()
-        case kVK_ANSI_V:  // ⌘⇧V
-            print("⌨️ HotkeyManager: ⌘⇧V detected")
-            showHistoryPopup()
-        case kVK_ANSI_S:  // ⌘⇧S (Settings)
-            print("⌨️ HotkeyManager: ⌘⇧S detected")
-            showSettings()
+    private static func eventTapCallback(
+        proxy: CGEventTapProxy,
+        type: CGEventType,
+        event: CGEvent,
+        refcon: UnsafeMutableRawPointer?
+    ) -> Unmanaged<CGEvent>? {
+        
+        // Handle tap disabled event
+        if type == .tapDisabledByTimeout || type == .tapDisabledByUserInput {
+            if let eventTap = shared.eventTap {
+                CGEvent.tapEnable(tap: eventTap, enable: true)
+                print("🔄 HotkeyManager: Re-enabled event tap")
+            }
+            return Unmanaged.passRetained(event)
+        }
+        
+        // Only process key down events
+        guard type == .keyDown else {
+            return Unmanaged.passRetained(event)
+        }
+        
+        // Get key code and flags
+        let keyCode = event.getIntegerValueField(.keyboardEventKeycode)
+        let flags = event.flags
+        
+        // Check for ⌘⇧ combination
+        let hasCmd = flags.contains(.maskCommand)
+        let hasShift = flags.contains(.maskShift)
+        let hasOnlyRequiredModifiers = hasCmd && hasShift && 
+            !flags.contains(.maskControl) && 
+            !flags.contains(.maskAlternate)
+        
+        guard hasOnlyRequiredModifiers else {
+            return Unmanaged.passRetained(event)
+        }
+        
+        // Check for our specific key codes
+        switch keyCode {
+        case 8:  // C key
+            print("⌨️ HotkeyManager: ⌘⇧C detected via CGEvent Tap")
+            shared.performHistoryCopy()
+            // Return nil to CONSUME the event and prevent beep!
+            return nil
+            
+        case 9:  // V key
+            print("⌨️ HotkeyManager: ⌘⇧V detected via CGEvent Tap")
+            shared.showHistoryPopup()
+            // Return nil to CONSUME the event and prevent beep!
+            return nil
+            
         default:
             break
         }
+        
+        // Pass through other events
+        return Unmanaged.passRetained(event)
     }
 
     // MARK: - Actions
@@ -128,14 +180,6 @@ final class HotkeyManager {
         DispatchQueue.main.async {
             print("🪟 HotkeyManager: Showing history popup...")
             WindowManager.shared.showPopup()
-        }
-    }
-    
-    /// Shows the settings window on the main thread.
-    private func showSettings() {
-        DispatchQueue.main.async {
-            print("⚙️ HotkeyManager: Showing settings...")
-            WindowManager.shared.showSettings()
         }
     }
 

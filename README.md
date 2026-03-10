@@ -4,9 +4,8 @@
 
 # Cliply
 
-[![Download DMG](https://img.shields.io/badge/Download-DMG-blue?style=for-the-badge&logo=apple)](https://github.com/luisdergoat/cliply/releases/latest/download/Cliply.dmg)
-[![Latest Release](https://img.shields.io/github/v/release/luisdergoat/cliply?style=for-the-badge)](https://github.com/luisdergoat/cliply/releases)
-
+[![Download DMG](https://img.shields.io/badge/Download-DMG-blue?style=for-the-badge&logo=apple)](https://github.com/Luisdergoat/Quick_Paste/releases/tag/Clipy)
+[![Latest Release](https://img.shields.io/github/v/release/luisdergoat/cliply?style=for-the-badge)](https://github.com/Luisdergoat/Quick_Paste)
 [![Swift](https://img.shields.io/badge/Swift-FA7343?style=for-the-badge&logo=swift&logoColor=white)](https://swift.org)
 [![Xcode](https://img.shields.io/badge/Xcode-007ACC?style=for-the-badge&logo=Xcode&logoColor=white)](https://developer.apple.com/xcode/)
 [![macOS](https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=apple&logoColor=white)](https://www.apple.com/macos/)
@@ -48,16 +47,16 @@ The result is a **focused, curated history** of only the things you actually mea
 ## ✨ Features
 
 ### 🎯 Curated Clipboard History
-Only stores items when you press **⌘⇧C** — normal ⌘C works unchanged.
+Only stores items when you press **⌘⇧C** — normal **⌘C** works unchanged.
 
 ### ⚡ Lightning-Fast Access
 Press **⌘⇧V** to instantly view your last 3 clipboard items in a beautiful popup.
 
 ### ⌨️ Full Keyboard Navigation
-Tab / Shift+Tab / ↑ / ↓ to navigate, Return to paste — never touch your mouse.
+**Tab** to navigate, Return to paste — never touch your mouse.
 
 ### 📚 Expandable History
-Press ↑ at the top to reveal your full clipboard history (up to 10 items).
+Press **H** at the top to reveal your full clipboard history (up to 10 items).
 
 ### 🎨 Native macOS Design
 - Frosted-glass background
@@ -82,7 +81,7 @@ No Dock icon — Cliply stays out of your way until you need it.
 
 ### Option 1: Download DMG (Recommended)
 
-1. **[Download the latest DMG](https://github.com/luisdergoat/cliply/releases/latest/download/Cliply.dmg)**
+1. **[Download the latest DMG](https://github.com/Luisdergoat/Quick_Paste/releases/tag/Clipy)**
 2. Open the DMG file
 3. Drag **Cliply.app** to your Applications folder
 4. Launch Cliply from Spotlight or Applications
@@ -98,10 +97,6 @@ brew tap luisdergoat/cliply
 brew install --cask cliply
 ```
 
-### Option 3: Build from Source
-
-See [Building from Source](#building-from-source) below.
-
 [Back to top ⬆️](#-table-of-contents)
 
 ---
@@ -112,11 +107,9 @@ See [Building from Source](#building-from-source) below.
 |----------|--------|
 | ⌘C | Normal copy — **not** stored in history |
 | **⌘⇧C** | History copy — copies selection **and** saves to history |
-| ⌘V | Normal paste |
+| ⌘V | Normal paste the last thing copied |
 | **⌘⇧V** | Show clipboard history popup |
 | Tab | Move selection down in popup |
-| Shift+Tab | Move selection up (or expand history at top) |
-| ↑ / ↓ | Navigate items (↑ at top expands history) |
 | Return | Paste selected item |
 | Escape | Dismiss popup |
 
@@ -186,10 +179,9 @@ Contributions are what make the open-source community such an amazing place to l
 
 - ⭐ **[Star on GitHub](https://github.com/luisdergoat/cliply)** - Help others discover Cliply
 - 🐛 **[Report Issues](https://github.com/luisdergoat/cliply/issues)** - Help us improve the app
-- 💡 **[Request Features](https://github.com/luisdergoat/cliply/issues/new)** - Suggest new ideas
+- 💡 **[Request Features](https://github.com/Luisdergoat/Quick_Paste/issues/new)** - Suggest new ideas
 - 🔧 **Submit Pull Requests** - Contribute code improvements
 - 📖 **Improve Documentation** - Help make the docs better
-- ☕ **[Buy Me a Coffee](https://www.buymeacoffee.com/luisdergoat)** - Support development
 
 ### Development Guidelines
 
@@ -219,21 +211,11 @@ If you find Cliply useful, consider supporting its development:
 
 <div align="center">
 
-[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/luisdergoat)
 [![GitHub Sponsors](https://img.shields.io/badge/Sponsor-GitHub-EA4AAA?style=for-the-badge&logo=github-sponsors)](https://github.com/sponsors/luisdergoat)
 
 **Your support helps keep Cliply free and open source!**
 
 </div>
-
----
-
-## 📊 Project Status
-
-![GitHub last commit](https://img.shields.io/github/last-commit/luisdergoat/cliply)
-![GitHub issues](https://img.shields.io/github/issues/luisdergoat/cliply)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/luisdergoat/cliply)
-![GitHub](https://img.shields.io/github/license/luisdergoat/cliply)
 
 ---
 
@@ -247,8 +229,8 @@ If you like Cliply, don't forget to give it a star! ⭐
 
 <div align="center">
 
-**Made with ❤️ by [Luis der Goat](https://github.com/luisdergoat)**
+**Made by [lunsold](https://github.com/luisdergoat)**
 
-[Report Bug](https://github.com/luisdergoat/cliply/issues) · [Request Feature](https://github.com/luisdergoat/cliply/issues/new)
+[Report Bug](https://github.com/Luisdergoat/Quick_Paste/issues)
 
 </div>

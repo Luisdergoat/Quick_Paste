@@ -132,7 +132,6 @@ struct SettingsView: View {
                 VStack(alignment: .leading, spacing: 6) {
                     shortcutRow(keys: "⌘⇧C", description: "Copy & Save to History")
                     shortcutRow(keys: "⌘⇧V", description: "Show Clipboard History")
-                    shortcutRow(keys: "⌘⇧S", description: "Open Settings")
                 }
                 .padding(.leading, 36)
             }
@@ -192,7 +191,7 @@ struct SettingsView: View {
     private var footerView: some View {
         VStack(spacing: 12) {
             // Version
-            Text("Version 1.0.0")
+            Text("Version 1.0.1 Beta")
                 .font(.system(size: 11, weight: .medium))
                 .foregroundColor(.scSecondary)
             
