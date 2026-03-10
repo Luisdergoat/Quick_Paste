@@ -2,7 +2,48 @@
 
 All notable changes to Cliply will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+## [1.0.1 Beta] - 2026-03-10
+
+### ✨ Added
+- **Auto-Update Feature**: Check for updates directly from GitHub releases
+  - Visual update indicator in Settings
+  - Automatic DMG download
+  - Installation instructions after download
+- **Individual Item Deletion**: Press `R` to delete selected item in history popup
+- **Most Recently Used (MRU)**: Items automatically move to top when pasted
+- **Settings Access Improvements**:
+  - Settings now open via menu bar click
+  - Settings shortcut `⌘,` added
+  - Direct access via left-click on menu bar icon
+  - Settings automatically open on first launch
+- **Better keyboard shortcuts documentation** in popup footer
+
+### 🔧 Fixed
+- **Settings Window not opening**: Complete rewrite of window management
+  - Fixed transparent window issue
+  - Proper window lifecycle management
+  - Window now stays open when clicked
+- **CGEvent Tap Implementation**: No more system beep on shortcuts
+  - `⌘⇧C` and `⌘⇧V` now recognized as valid system shortcuts
+  - Requires Accessibility permission
+- **FIFO Queue**: Oldest item automatically removed when reaching 10 items
+- **Selection Index**: Fixed index adjustment after item deletion
+
+### 🎨 Changed
+- Footer hints updated: "Delete" → "Clear All", added "Remove" for `R` key
+- Window Manager: Improved debugging output
+- ClipboardManager: Added `removeItem(at:)` and `moveToFront(at:)` methods
+- Settings Window: Better styling with visible titlebar
+
+### 🏗️ Technical
+- Added `UpdateManager.swift`: GitHub API integration for updates
+- Version comparison logic for semantic versioning
+- URLSession-based async update checks
+- Improved error handling in all managers
+
+---
+
+## [1.0.0] - 2024-12-28
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]

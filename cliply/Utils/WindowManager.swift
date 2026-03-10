@@ -64,38 +64,50 @@ final class WindowManager: NSObject, NSWindowDelegate {
     
     /// Shows the settings window
     func showSettings() {
-        if let existing = settingsWindow, existing.isVisible {
-            existing.makeKeyAndOrderFront(nil)
-            NSApp.activate(ignoringOtherApps: true)
-            return
+        print("🔧 WindowManager: showSettings() called")
+        
+        // Close existing window if present
+        if let existing = settingsWindow {
+            print("   Closing existing settings window")
+            existing.close()
+            settingsWindow = nil
         }
         
+        // Always create a fresh window
         createSettingsWindow()
     }
     
     private func createSettingsWindow() {
+        print("   Creating new settings window...")
+        
         let settingsView = SettingsView()
         let hostingController = NSHostingController(rootView: settingsView)
         
         let window = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 500, height: 600),
-            styleMask: [.titled, .closable, .fullSizeContentView],
+            contentRect: NSRect(x: 0, y: 0, width: 580, height: 700),
+            styleMask: [.titled, .closable, .miniaturizable, .resizable],
             backing: .buffered,
             defer: false
         )
         
         window.contentViewController = hostingController
         window.title = "Cliply Settings"
-        window.titlebarAppearsTransparent = true
-        window.backgroundColor = .clear
-        window.isOpaque = false
+        window.titlebarAppearsTransparent = false
+        window.titleVisibility = .visible
+        window.backgroundColor = NSColor(red: 0.12, green: 0.16, blue: 0.14, alpha: 1.0)
+        window.isOpaque = true
         window.center()
+        window.isReleasedWhenClosed = false
+        window.delegate = self
+        
+        // Store before showing
+        self.settingsWindow = window
+        
+        // Show window
         window.makeKeyAndOrderFront(nil)
         NSApp.activate(ignoringOtherApps: true)
         
-        self.settingsWindow = window
-        
-        print("⚙️ WindowManager: Settings window opened")
+        print("✅ WindowManager: Settings window created and shown")
     }
 
     // MARK: - Panel Creation
@@ -174,7 +186,21 @@ final class WindowManager: NSObject, NSWindowDelegate {
     // MARK: - NSWindowDelegate
 
     func windowDidResignKey(_ notification: Notification) {
-        // DON'T dismiss automatically - user must press Esc or Enter
-        print("⚠️ WindowManager: Panel resigned key (but not dismissing)")
+        // Only applies to popup panel, not settings window
+        if let window = notification.object as? NSWindow, window == panel {
+            print("⚠️ WindowManager: Panel resigned key (but not dismissing)")
+        }
+    }
+    
+    func windowWillClose(_ notification: Notification) {
+        if let window = notification.object as? NSWindow {
+            if window == settingsWindow {
+                print("🚪 WindowManager: Settings window closing")
+                settingsWindow = nil
+            } else if window == panel {
+                print("🚪 WindowManager: Panel closing")
+                panel = nil
+            }
+        }
     }
 }

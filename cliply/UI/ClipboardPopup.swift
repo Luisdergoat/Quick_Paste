@@ -35,7 +35,7 @@ struct ClipboardPopup: View {
                 mainContent
             }
         }
-        .frame(width: 380)
+        .frame(width: 480)
         .frame(height: isExpanded ? 520 : 280)
         .overlay(
             RoundedRectangle(cornerRadius: 16, style: .continuous)
@@ -58,7 +58,8 @@ struct ClipboardPopup: View {
                     withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
                         isExpanded = true
                     }
-                }
+                },
+                onDeleteSelected: deleteSelectedItem
             )
         )
     }
@@ -192,7 +193,8 @@ struct ClipboardPopup: View {
                 keyHint(key: "⇥", label: "Next")
                 keyHint(key: "↩", label: "Paste")
                 keyHint(key: "H", label: isExpanded ? "Less" : "More")
-                keyHint(key: "D", label: "Delete")
+                keyHint(key: "R", label: "Remove")
+                keyHint(key: "D", label: "Clear All")
                 keyHint(key: "⎋", label: "Close")
             }
             
@@ -280,7 +282,32 @@ struct ClipboardPopup: View {
     private func commitSelection() {
         let items = isExpanded ? clipboardManager.history : Array(clipboardManager.history.prefix(3))
         guard selectedIndex < items.count else { return }
+        
+        // Move selected item to front (most recently used)
+        ClipboardManager.shared.moveToFront(at: selectedIndex)
+        
         paste(item: items[selectedIndex])
+    }
+    
+    private func deleteSelectedItem() {
+        let items = isExpanded ? clipboardManager.history : Array(clipboardManager.history.prefix(3))
+        guard selectedIndex < items.count else { return }
+        
+        print("🗑️ Deleting selected item at index \(selectedIndex)")
+        ClipboardManager.shared.removeItem(at: selectedIndex)
+        
+        // Adjust selection if needed
+        let maxIndex = isExpanded ? max(clipboardManager.history.count - 1, 0) : max(min(clipboardManager.history.count, 3) - 1, 0)
+        if selectedIndex > maxIndex {
+            selectedIndex = max(maxIndex, 0)
+        }
+        
+        // Close popup if no items left
+        if clipboardManager.history.isEmpty {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                onDismiss()
+            }
+        }
     }
 }
 
@@ -322,6 +349,7 @@ private struct KeyEventHandler: NSViewRepresentable {
     let onCommit: () -> Void
     let onDismiss: () -> Void
     let onExpand: () -> Void
+    let onDeleteSelected: () -> Void
 
     func makeNSView(context: Context) -> KeyCaptureView {
         let view = KeyCaptureView()
@@ -332,7 +360,8 @@ private struct KeyEventHandler: NSViewRepresentable {
             totalCount: totalCount,
             onCommit: onCommit,
             onDismiss: onDismiss,
-            onExpand: onExpand
+            onExpand: onExpand,
+            onDeleteSelected: onDeleteSelected
         )
         return view
     }
@@ -345,7 +374,8 @@ private struct KeyEventHandler: NSViewRepresentable {
             totalCount: totalCount,
             onCommit: onCommit,
             onDismiss: onDismiss,
-            onExpand: onExpand
+            onExpand: onExpand,
+            onDeleteSelected: onDeleteSelected
         )
     }
 
@@ -360,6 +390,7 @@ private struct KeyEventHandler: NSViewRepresentable {
         private var onCommit: (() -> Void)?
         private var onDismiss: (() -> Void)?
         private var onExpand: (() -> Void)?
+        private var onDeleteSelected: (() -> Void)?
         private var isActive: Bool = false
 
         override var acceptsFirstResponder: Bool { true }
@@ -386,7 +417,8 @@ private struct KeyEventHandler: NSViewRepresentable {
             totalCount: Int,
             onCommit: @escaping () -> Void,
             onDismiss: @escaping () -> Void,
-            onExpand: @escaping () -> Void
+            onExpand: @escaping () -> Void,
+            onDeleteSelected: @escaping () -> Void
         ) {
             self.selectedIndex = selectedIndex
             self.isExpanded = isExpanded
@@ -395,6 +427,7 @@ private struct KeyEventHandler: NSViewRepresentable {
             self.onCommit = onCommit
             self.onDismiss = onDismiss
             self.onExpand = onExpand
+            self.onDeleteSelected = onDeleteSelected
             
             // Reinstall if already active (for updates)
             if isActive {
@@ -490,6 +523,13 @@ private struct KeyEventHandler: NSViewRepresentable {
                 print("🗑️ D - delete history")
                 ClipboardManager.shared.clearHistory()
                 // Event consumed - don't call super
+                
+            case 15: // R key - Remove selected item
+                print("🗑️ R - remove selected item")
+                DispatchQueue.main.async { [weak self] in
+                    self?.onDeleteSelected?()
+                }
+                // Event consumed - don't call super
 
             default:
                 // Andere Tasten an System weitergeben
@@ -551,6 +591,13 @@ private struct KeyEventHandler: NSViewRepresentable {
             case 2: // D key - Delete History
                 print("🗑️ D - delete history")
                 ClipboardManager.shared.clearHistory()
+                return nil // CONSUMED
+                
+            case 15: // R key - Remove selected item
+                print("🗑️ R - remove selected item")
+                DispatchQueue.main.async { [weak self] in
+                    self?.onDeleteSelected?()
+                }
                 return nil // CONSUMED
 
             default:

@@ -77,6 +77,26 @@ final class ClipboardManager: ObservableObject {
         history.removeAll()
         print("🗑️ ClipboardManager: History cleared")
     }
+    
+    /// Remove a single item from history by index
+    func removeItem(at index: Int) {
+        guard index >= 0 && index < history.count else {
+            print("❌ ClipboardManager: Invalid index \(index)")
+            return
+        }
+        
+        let removedItem = history.remove(at: index)
+        print("🗑️ ClipboardManager: Removed item at index \(index): '\(removedItem.text.prefix(30))...'")
+    }
+    
+    /// Move an item to the front (most recently used)
+    func moveToFront(at index: Int) {
+        guard index > 0 && index < history.count else { return }
+        
+        let item = history.remove(at: index)
+        history.insert(item, at: 0)
+        print("⬆️ ClipboardManager: Moved item to front: '\(item.text.prefix(30))...'")
+    }
 
     /// Manually capture the current clipboard content and add to history if new.
     /// the history if it is non-empty and not a duplicate of the most-recent

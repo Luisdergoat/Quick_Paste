@@ -8,6 +8,7 @@ struct SettingsView: View {
     @State private var launchAtLogin: Bool = false
     @State private var isEnabled: Bool = true
     @AppStorage("cliplyEnabled") private var cliplyEnabled: Bool = true
+    @StateObject private var updateManager = UpdateManager.shared
     
     var body: some View {
         VStack(spacing: 0) {
@@ -32,7 +33,7 @@ struct SettingsView: View {
                 .padding(.horizontal, 40)
                 .padding(.vertical, 20)
         }
-        .frame(width: 500, height: 600)
+        .frame(width: 580, height: 700)
         .background(Color.scDarkGreen)
         .onAppear {
             loadLaunchAtLoginStatus()
@@ -111,6 +112,71 @@ struct SettingsView: View {
                             ClipboardManager.shared.stopMonitoring()
                         }
                     }
+            }
+            
+            Divider()
+                .background(Color.scBorder)
+            
+            // Auto-Update Section
+            VStack(alignment: .leading, spacing: 10) {
+                HStack {
+                    Image(systemName: "arrow.triangle.2.circlepath")
+                        .font(.system(size: 16))
+                        .foregroundColor(.scMediumBeige)
+                        .frame(width: 24)
+                    
+                    Text("Auto-Update")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundColor(.scLightBeige)
+                    
+                    Spacer()
+                    
+                    if updateManager.isCheckingForUpdates {
+                        ProgressView()
+                            .scaleEffect(0.7)
+                            .frame(width: 20, height: 20)
+                    } else if updateManager.updateAvailable {
+                        Circle()
+                            .fill(Color.green)
+                            .frame(width: 8, height: 8)
+                    }
+                }
+                
+                Text("Check for updates from GitHub releases")
+                    .font(.system(size: 11))
+                    .foregroundColor(.scSecondary)
+                    .padding(.leading, 36)
+                
+                HStack(spacing: 8) {
+                    Button(action: {
+                        updateManager.checkForUpdates(showAlertIfNoUpdate: true)
+                    }) {
+                        HStack(spacing: 6) {
+                            Image(systemName: "arrow.clockwise")
+                                .font(.system(size: 11))
+                            Text("Check for Updates")
+                                .font(.system(size: 12, weight: .medium))
+                        }
+                        .foregroundColor(.scDarkGreen)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 6)
+                        .background(
+                            RoundedRectangle(cornerRadius: 6, style: .continuous)
+                                .fill(Color.scMediumBeige)
+                        )
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    .disabled(updateManager.isCheckingForUpdates)
+                    
+                    if let latestVersion = updateManager.latestVersion {
+                        Text("Latest: v\(latestVersion)")
+                            .font(.system(size: 11))
+                            .foregroundColor(.scSecondary)
+                    }
+                    
+                    Spacer()
+                }
+                .padding(.leading, 36)
             }
             
             Divider()
