@@ -1,44 +1,115 @@
 <div align="center">
 
+<img src="cliply/Resources/Assets.xcassets/AppIcon.appiconset/icon_256x256.png" alt="Cliply Icon" width="128" height="128">
+
 # Cliply
 
-**A curated clipboard history manager for macOS.**
+[![Download DMG](https://img.shields.io/badge/Download-DMG-blue?style=for-the-badge&logo=apple)](https://github.com/luisdergoat/cliply/releases/latest/download/Cliply.dmg)
+[![Latest Release](https://img.shields.io/github/v/release/luisdergoat/cliply?style=for-the-badge)](https://github.com/luisdergoat/cliply/releases)
 
-Cliply only saves what you *intend* to save — copy with ⌘⇧C to store an item, ⌘⇧V to retrieve it.
+[![Swift](https://img.shields.io/badge/Swift-FA7343?style=for-the-badge&logo=swift&logoColor=white)](https://swift.org)
+[![Xcode](https://img.shields.io/badge/Xcode-007ACC?style=for-the-badge&logo=Xcode&logoColor=white)](https://developer.apple.com/xcode/)
+[![macOS](https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=apple&logoColor=white)](https://www.apple.com/macos/)
 
-![macOS 13+](https://img.shields.io/badge/macOS-13%2B-blue?style=flat-square)
-![Swift 5.9](https://img.shields.io/badge/Swift-5.9-orange?style=flat-square)
-![SwiftUI](https://img.shields.io/badge/SwiftUI-✓-green?style=flat-square)
-![License: MIT](https://img.shields.io/badge/License-MIT-lightgrey?style=flat-square)
+**A curated clipboard history manager that only saves what you intend to save.**
+
+Cliply revolutionizes clipboard management on macOS by storing items only when you explicitly choose to — no more accidental history pollution.
 
 </div>
 
 ---
 
-## Overview
+## 📋 Table of Contents
 
-Most clipboard managers record everything you copy. Cliply takes a different approach: it only stores clipboard entries when you **intentionally** invoke ⌘⇧C. Normal ⌘C works exactly as before — no surprises, no accidental history pollution.
-
-The result is a focused, curated history of the things you actually meant to save.
-
----
-
-## Features
-
-- **Curated history** — stores items only on ⌘⇧C, not on every ⌘C
-- **Compact popup** — ⌘⇧V shows the 3 most-recent items in a floating panel
-- **Keyboard navigation** — Tab / Shift+Tab / ↑ / ↓ to move, Return to paste
-- **Expanded history** — press ↑ or Shift+Tab at the top to reveal all 10 items
-- **Instant paste** — selecting an item places it on the clipboard and simulates ⌘V
-- **Menu bar only** — no Dock icon, stays out of your way
-- **Native macOS look** — frosted-glass background, smooth spring animations, rounded corners
+1. [About The Project](#about-the-project)
+2. [Features](#features)
+3. [Installation](#installation)
+4. [Keyboard Shortcuts](#keyboard-shortcuts)
+5. [Building from Source](#building-from-source)
+6. [Contributing](#contributing)
+7. [License](#license)
 
 ---
 
-## Keyboard Shortcuts
+## 🎯 About The Project
+
+Most clipboard managers record **everything** you copy, creating a cluttered history filled with passwords, sensitive data, and temporary text you never wanted to keep.
+
+**Cliply** takes a different approach: it only stores clipboard entries when you **intentionally** invoke **⌘⇧C**. Normal ⌘C works exactly as before — no surprises, no automatic tracking.
+
+The result is a **focused, curated history** of only the things you actually meant to save.
+
+**Built entirely with SwiftUI, Cliply is fast, lightweight, and feels like a native extension of macOS.**
+
+[Back to top ⬆️](#-table-of-contents)
+
+---
+
+## ✨ Features
+
+### 🎯 Curated Clipboard History
+Only stores items when you press **⌘⇧C** — normal ⌘C works unchanged.
+
+### ⚡ Lightning-Fast Access
+Press **⌘⇧V** to instantly view your last 3 clipboard items in a beautiful popup.
+
+### ⌨️ Full Keyboard Navigation
+Tab / Shift+Tab / ↑ / ↓ to navigate, Return to paste — never touch your mouse.
+
+### 📚 Expandable History
+Press ↑ at the top to reveal your full clipboard history (up to 10 items).
+
+### 🎨 Native macOS Design
+- Frosted-glass background
+- Smooth spring animations
+- Rounded corners
+- Dark mode support
+
+### 🔒 Privacy-First
+- No cloud sync
+- No network access
+- All data stored locally
+- You control what gets saved
+
+### 🚀 Menu Bar Only
+No Dock icon — Cliply stays out of your way until you need it.
+
+[Back to top ⬆️](#-table-of-contents)
+
+---
+
+## 📥 Installation
+
+### Option 1: Download DMG (Recommended)
+
+1. **[Download the latest DMG](https://github.com/luisdergoat/cliply/releases/latest/download/Cliply.dmg)**
+2. Open the DMG file
+3. Drag **Cliply.app** to your Applications folder
+4. Launch Cliply from Spotlight or Applications
+5. Grant accessibility permissions when prompted
+
+### Option 2: Homebrew (Coming Soon)
+
+```bash
+# Add the tap
+brew tap luisdergoat/cliply
+
+# Install Cliply
+brew install --cask cliply
+```
+
+### Option 3: Build from Source
+
+See [Building from Source](#building-from-source) below.
+
+[Back to top ⬆️](#-table-of-contents)
+
+---
+
+## ⌨️ Keyboard Shortcuts
 
 | Shortcut | Action |
-|---|---|
+|----------|--------|
 | ⌘C | Normal copy — **not** stored in history |
 | **⌘⇧C** | History copy — copies selection **and** saves to history |
 | ⌘V | Normal paste |
@@ -49,178 +120,135 @@ The result is a focused, curated history of the things you actually meant to sav
 | Return | Paste selected item |
 | Escape | Dismiss popup |
 
----
 
-## Screenshots
-
-> *Screenshots will be added once the app is running on macOS.*
-
-| Compact popup (⌘⇧V) | Expanded history |
-|---|---|
-| *(screenshot)* | *(screenshot)* |
+[Back to top ⬆️](#-table-of-contents)
 
 ---
 
-## Requirements
+## 🛠️ Building from Source
+
+### Prerequisites
 
 - macOS 13 Ventura or later
 - Xcode 15 or later
-- **Accessibility permission** (required for global keyboard shortcuts)
+- An Apple Developer account (for code signing)
 
----
-
-## Installation
-
-### Build from Source
+### Build Steps
 
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/Luisdergoat/Quick_Paste.git Cliply
-   cd Cliply
+   git clone https://github.com/luisdergoat/cliply.git
+   cd cliply
    ```
 
 2. **Open in Xcode**
 
    ```bash
-   open Cliply.xcodeproj
+   open cliply.xcodeproj
    ```
 
-3. **Select your signing team**
+3. **Configure code signing**
 
-   In Xcode → Cliply target → Signing & Capabilities, select your personal team.
+   - Select the **Cliply** target in Xcode
+   - Go to **Signing & Capabilities**
+   - Select your development team
 
 4. **Build & Run**
 
-   Press ⌘R. Cliply will appear in your menu bar as a clipboard icon.
+   Press **⌘R** or click the Run button. Cliply will appear in your menu bar.
 
-5. **Grant Accessibility permission**
+5. **Grant accessibility permissions**
 
-   On first launch, Cliply will prompt you to open System Settings → Privacy & Security → Accessibility. Add Cliply to the allowed list and relaunch.
+   On first launch, you'll be prompted to grant accessibility permissions:
+   - Open **System Settings** → **Privacy & Security** → **Accessibility**
+   - Add **Cliply** to the allowed list
+   - Relaunch the app
+
+### Creating a DMG for Distribution
+
+```bash
+# Run the build script
+./scripts/build_dmg.sh
+```
+
+This will create a **Cliply.dmg** file ready for distribution.
+
+[Back to top ⬆️](#-table-of-contents)
 
 ---
 
-## Architecture
+## 🤝 Contributing
 
-```
-Cliply/
-│
-├── App/
-│   └── CliplyApp.swift        # @main entry point, AppDelegate, menu bar item
-│
-├── Clipboard/
-│   └── ClipboardManager.swift    # History storage, max-10 ring buffer, NSPasteboard API
-│
-├── Hotkeys/
-│   └── HotkeyManager.swift       # Global NSEvent monitors for ⌘⇧C / ⌘⇧V
-│
-├── UI/
-│   ├── ClipboardPopup.swift       # Root floating panel view + KeyEventHandler
-│   ├── ClipboardItemRow.swift     # Individual history row (index badge + preview)
-│   └── ExpandedHistoryView.swift  # Full scrollable 10-item history
-│
-├── Models/
-│   └── ClipboardItem.swift        # Value type: id, text, timestamp, preview
-│
-├── Utils/
-│   └── WindowManager.swift        # NSPanel lifecycle + screen positioning
-│
-└── Resources/
-    ├── Info.plist                  # Bundle metadata, LSUIElement = true
-    └── Cliply.entitlements      # Hardened runtime entitlements
-```
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-### Key design decisions
+### Ways to Contribute
 
-- **`LSUIElement = true`** hides the Dock icon; the app lives in the menu bar.
-- **`NSPanel` with `.nonactivatingPanel`** keeps the popup from stealing focus from the active app, so ⌘V pastes into the correct window.
-- **Simulated ⌘C on ⌘⇧C** — Cliply posts a CGEvent ⌘C to the frontmost app, waits 150 ms for the clipboard to update, then reads and stores the result.
-- **ObservableObject + @Published** — `ClipboardManager` drives the SwiftUI popup reactively; no polling needed.
+- ⭐ **[Star on GitHub](https://github.com/luisdergoat/cliply)** - Help others discover Cliply
+- 🐛 **[Report Issues](https://github.com/luisdergoat/cliply/issues)** - Help us improve the app
+- 💡 **[Request Features](https://github.com/luisdergoat/cliply/issues/new)** - Suggest new ideas
+- 🔧 **Submit Pull Requests** - Contribute code improvements
+- 📖 **Improve Documentation** - Help make the docs better
+- ☕ **[Buy Me a Coffee](https://www.buymeacoffee.com/luisdergoat)** - Support development
 
----
-
-## How It Works
-
-```
-User presses ⌘⇧C
-       │
-       ▼
-HotkeyManager detects event
-       │
-       ▼
-Simulates ⌘C via CGEvent → frontmost app copies selection
-       │
-  150 ms delay
-       │
-       ▼
-ClipboardManager reads NSPasteboard.general
-       │
-       ▼
-Prepends ClipboardItem to history array (max 10)
-
-─────────────────────────────────────────
-
-User presses ⌘⇧V
-       │
-       ▼
-HotkeyManager calls WindowManager.showPopup()
-       │
-       ▼
-NSPanel with ClipboardPopup view is shown
-       │
-User navigates with Tab / ↑↓ and presses Return
-       │
-       ▼
-ClipboardManager.setSystemClipboard(to: item)
-       │
-       ▼
-Panel closes → CGEvent ⌘V posted to frontmost app
-```
-
----
-
-## Contributing
-
-Pull requests are welcome. For major changes please open an issue first to discuss what you would like to change.
+### Development Guidelines
 
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/your-feature`)
-3. Commit your changes (`git commit -m 'Add your feature'`)
-4. Push to the branch (`git push origin feature/your-feature`)
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
+
+[Back to top ⬆️](#-table-of-contents)
 
 ---
 
-## License
+## 📜 License
 
-This project is licensed under the **MIT License**.
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
 
-```
-MIT License
+**Copyright © 2026 Luis der Goat**
 
-Copyright (c) 2024 Cliply Contributors
+[Back to top ⬆️](#-table-of-contents)
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+---
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+## 💖 Support the Project
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
+If you find Cliply useful, consider supporting its development:
+
+<div align="center">
+
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/luisdergoat)
+[![GitHub Sponsors](https://img.shields.io/badge/Sponsor-GitHub-EA4AAA?style=for-the-badge&logo=github-sponsors)](https://github.com/sponsors/luisdergoat)
+
+**Your support helps keep Cliply free and open source!**
+
+</div>
+
+---
+
+## 📊 Project Status
+
+![GitHub last commit](https://img.shields.io/github/last-commit/luisdergoat/cliply)
+![GitHub issues](https://img.shields.io/github/issues/luisdergoat/cliply)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/luisdergoat/cliply)
+![GitHub](https://img.shields.io/github/license/luisdergoat/cliply)
+
+---
+
+## 🌟 Star History
+
+If you like Cliply, don't forget to give it a star! ⭐
+
+[![Star History Chart](https://api.star-history.com/svg?repos=luisdergoat/cliply&type=Date)](https://star-history.com/#luisdergoat/cliply&Date)
 
 ---
 
 <div align="center">
-Made with ♥ for macOS
+
+**Made with ❤️ by [Luis der Goat](https://github.com/luisdergoat)**
+
+[Report Bug](https://github.com/luisdergoat/cliply/issues) · [Request Feature](https://github.com/luisdergoat/cliply/issues/new)
+
 </div>
