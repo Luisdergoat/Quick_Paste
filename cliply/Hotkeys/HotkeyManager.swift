@@ -3,7 +3,7 @@ import Carbon
 
 /// Registers and handles global keyboard shortcuts.
 ///
-/// ShiftClip intercepts two shortcuts:
+/// Cliply intercepts two shortcuts:
 ///
 /// - **⌘⇧C** — "history copy": simulates a standard ⌘C to copy the
 ///   selection, waits briefly for the clipboard to update, then stores the
@@ -37,6 +37,8 @@ final class HotkeyManager {
 
     /// Starts listening for global keyboard events. Call once on app launch.
     func start() {
+        print("🎹 HotkeyManager: Starting global keyboard monitoring...")
+        
         // Monitor events from other applications.
         globalMonitor = NSEvent.addGlobalMonitorForEvents(
             matching: .keyDown
@@ -53,8 +55,20 @@ final class HotkeyManager {
             // Return the event so SwiftUI can also process it (keyboard nav).
             return event
         }
+        
+        print("✅ HotkeyManager: Monitoring active")
     }
 
+    /// Starts listening for global keyboard events.
+    func registerHotkeys() {
+        start()
+    }
+    
+    /// Stops listening for global keyboard events.
+    func unregisterHotkeys() {
+        stop()
+    }
+    
     /// Stops listening for global keyboard events.
     func stop() {
         if let monitor = globalMonitor {
@@ -65,6 +79,7 @@ final class HotkeyManager {
             NSEvent.removeMonitor(monitor)
             localMonitor = nil
         }
+        print("🛑 HotkeyManager: Monitoring stopped")
     }
 
     // MARK: - Event Handling
@@ -75,11 +90,17 @@ final class HotkeyManager {
 
         guard mods == shiftCmd else { return }
 
-        switch event.keyCode {
+        // Use Int(event.keyCode) so the Carbon kVK_* (Int) constants match
+        switch Int(event.keyCode) {
         case kVK_ANSI_C:  // ⌘⇧C
+            print("⌨️ HotkeyManager: ⌘⇧C detected")
             performHistoryCopy()
         case kVK_ANSI_V:  // ⌘⇧V
+            print("⌨️ HotkeyManager: ⌘⇧V detected")
             showHistoryPopup()
+        case kVK_ANSI_S:  // ⌘⇧S (Settings)
+            print("⌨️ HotkeyManager: ⌘⇧S detected")
+            showSettings()
         default:
             break
         }
@@ -89,11 +110,15 @@ final class HotkeyManager {
 
     /// Simulates ⌘C to copy the current selection, then stores the result.
     private func performHistoryCopy() {
+        print("📋 HotkeyManager: Simulating ⌘C...")
+        
         // Simulate a standard copy so the selected text lands on the clipboard.
         simulateCopy()
 
         // Give the system a moment to process the copy event before reading.
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+        // Increased to 200ms for better reliability in Safari and other apps.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            print("📋 HotkeyManager: Capturing clipboard...")
             ClipboardManager.shared.captureCurrentClipboard()
         }
     }
@@ -101,7 +126,16 @@ final class HotkeyManager {
     /// Shows the history popup panel on the main thread.
     private func showHistoryPopup() {
         DispatchQueue.main.async {
+            print("🪟 HotkeyManager: Showing history popup...")
             WindowManager.shared.showPopup()
+        }
+    }
+    
+    /// Shows the settings window on the main thread.
+    private func showSettings() {
+        DispatchQueue.main.async {
+            print("⚙️ HotkeyManager: Showing settings...")
+            WindowManager.shared.showSettings()
         }
     }
 
@@ -127,5 +161,7 @@ final class HotkeyManager {
             keyUp.flags = .maskCommand
             keyUp.post(tap: .cghidEventTap)
         }
+        
+        print("✅ HotkeyManager: ⌘C simulated")
     }
 }

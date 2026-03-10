@@ -1,10 +1,10 @@
 <div align="center">
 
-# ShiftClip
+# Cliply
 
 **A curated clipboard history manager for macOS.**
 
-ShiftClip only saves what you *intend* to save — copy with ⌘⇧C to store an item, ⌘⇧V to retrieve it.
+Cliply only saves what you *intend* to save — copy with ⌘⇧C to store an item, ⌘⇧V to retrieve it.
 
 ![macOS 13+](https://img.shields.io/badge/macOS-13%2B-blue?style=flat-square)
 ![Swift 5.9](https://img.shields.io/badge/Swift-5.9-orange?style=flat-square)
@@ -17,7 +17,7 @@ ShiftClip only saves what you *intend* to save — copy with ⌘⇧C to store an
 
 ## Overview
 
-Most clipboard managers record everything you copy. ShiftClip takes a different approach: it only stores clipboard entries when you **intentionally** invoke ⌘⇧C. Normal ⌘C works exactly as before — no surprises, no accidental history pollution.
+Most clipboard managers record everything you copy. Cliply takes a different approach: it only stores clipboard entries when you **intentionally** invoke ⌘⇧C. Normal ⌘C works exactly as before — no surprises, no accidental history pollution.
 
 The result is a focused, curated history of the things you actually meant to save.
 
@@ -76,37 +76,37 @@ The result is a focused, curated history of the things you actually meant to sav
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/Luisdergoat/Quick_Paste.git ShiftClip
-   cd ShiftClip
+   git clone https://github.com/Luisdergoat/Quick_Paste.git Cliply
+   cd Cliply
    ```
 
 2. **Open in Xcode**
 
    ```bash
-   open ShiftClip.xcodeproj
+   open Cliply.xcodeproj
    ```
 
 3. **Select your signing team**
 
-   In Xcode → ShiftClip target → Signing & Capabilities, select your personal team.
+   In Xcode → Cliply target → Signing & Capabilities, select your personal team.
 
 4. **Build & Run**
 
-   Press ⌘R. ShiftClip will appear in your menu bar as a clipboard icon.
+   Press ⌘R. Cliply will appear in your menu bar as a clipboard icon.
 
 5. **Grant Accessibility permission**
 
-   On first launch, ShiftClip will prompt you to open System Settings → Privacy & Security → Accessibility. Add ShiftClip to the allowed list and relaunch.
+   On first launch, Cliply will prompt you to open System Settings → Privacy & Security → Accessibility. Add Cliply to the allowed list and relaunch.
 
 ---
 
 ## Architecture
 
 ```
-ShiftClip/
+Cliply/
 │
 ├── App/
-│   └── ShiftClipApp.swift        # @main entry point, AppDelegate, menu bar item
+│   └── CliplyApp.swift        # @main entry point, AppDelegate, menu bar item
 │
 ├── Clipboard/
 │   └── ClipboardManager.swift    # History storage, max-10 ring buffer, NSPasteboard API
@@ -127,14 +127,14 @@ ShiftClip/
 │
 └── Resources/
     ├── Info.plist                  # Bundle metadata, LSUIElement = true
-    └── ShiftClip.entitlements      # Hardened runtime entitlements
+    └── Cliply.entitlements      # Hardened runtime entitlements
 ```
 
 ### Key design decisions
 
 - **`LSUIElement = true`** hides the Dock icon; the app lives in the menu bar.
 - **`NSPanel` with `.nonactivatingPanel`** keeps the popup from stealing focus from the active app, so ⌘V pastes into the correct window.
-- **Simulated ⌘C on ⌘⇧C** — ShiftClip posts a CGEvent ⌘C to the frontmost app, waits 150 ms for the clipboard to update, then reads and stores the result.
+- **Simulated ⌘C on ⌘⇧C** — Cliply posts a CGEvent ⌘C to the frontmost app, waits 150 ms for the clipboard to update, then reads and stores the result.
 - **ObservableObject + @Published** — `ClipboardManager` drives the SwiftUI popup reactively; no polling needed.
 
 ---
@@ -198,7 +198,7 @@ This project is licensed under the **MIT License**.
 ```
 MIT License
 
-Copyright (c) 2024 ShiftClip Contributors
+Copyright (c) 2024 Cliply Contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

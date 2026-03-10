@@ -3,13 +3,13 @@ import AppKit
 
 /// Application entry point.
 ///
-/// ShiftClip runs as a menu-bar-only app (no Dock icon) to stay out of the
+/// Cliply runs as a menu-bar-only app (no Dock icon) to stay out of the
 /// way. On launch it:
 /// 1. Verifies Accessibility permission (required for global hotkeys).
 /// 2. Starts the ``HotkeyManager``.
 /// 3. Installs a menu-bar status item with a Quit option.
 @main
-struct ShiftClipApp: App {
+struct CliplyApp: App {
 
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
@@ -49,12 +49,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         if let button = statusItem?.button {
             button.image = NSImage(
                 systemSymbolName: "doc.on.clipboard",
-                accessibilityDescription: "ShiftClip"
+                accessibilityDescription: "Cliply"
             )
         }
 
         let menu = NSMenu()
-        menu.addItem(withTitle: "ShiftClip", action: nil, keyEquivalent: "")
+        menu.addItem(withTitle: "Cliply", action: nil, keyEquivalent: "")
             .isEnabled = false
 
         menu.addItem(.separator())
@@ -74,7 +74,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         menu.addItem(.separator())
 
         menu.addItem(
-            withTitle: "Quit ShiftClip",
+            withTitle: "Quit Cliply",
             action: #selector(NSApplication.terminate(_:)),
             keyEquivalent: "q"
         )
@@ -95,7 +95,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     // MARK: - Accessibility
 
     /// Prompts the user to grant Accessibility access if it has not yet been
-    /// granted. Accessibility is required so ShiftClip can:
+    /// granted. Accessibility is required so Cliply can:
     /// - Listen for global keyboard shortcuts via ``NSEvent`` monitors.
     /// - Post synthetic ⌘C / ⌘V events via ``CGEvent``.
     private func requestAccessibilityPermissionIfNeeded() {
@@ -112,10 +112,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         let alert = NSAlert()
         alert.messageText = "Accessibility Permission Required"
         alert.informativeText =
-            "ShiftClip needs Accessibility access to intercept global " +
+            "Cliply needs Accessibility access to intercept global " +
             "keyboard shortcuts.\n\n" +
             "Please grant access in System Settings → Privacy & Security → " +
-            "Accessibility, then relaunch ShiftClip."
+            "Accessibility, then relaunch Cliply."
         alert.alertStyle = .warning
         alert.addButton(withTitle: "Open System Settings")
         alert.addButton(withTitle: "Later")
